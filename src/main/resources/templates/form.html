@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/form.css">
+    <title>Add person form</title>
+</head>
+<body>
+<main>
+    <header>
+        <h1 id="title">
+            Register
+        </h1>
+        <p id="description">
+            <em>Fill in the registration form below</em>
+        </p>
+    </header>
+    <form id="survey-form" action="#" th:action="@{/form}" th:object="${person}" method="post">
+        <div class="form-group">
+            <label th:for="${#ids.next('firstName')}">
+                First Name
+            </label>
+            <input type="text" th:field="*{firstName}"
+                   placeholder="Enter your first name"
+                   class="form-control"
+                   required/>
+        </div>
+        <div class="form-group">
+            <label th:for="${#ids.next('lastName')}">
+                Last Name
+            </label>
+            <input type="text"
+                   th:field="*{lastName}"
+                   placeholder="Enter your last name"
+                   class="form-control"
+                   required/>
+        </div>
+        <div class="form-group">
+            <label th:for="${#ids.next('email')}">
+                E-mail
+            </label>
+            <input type="email"
+                   th:field="*{email}"
+                   placeholder="Enter your email"
+                   class="form-control"
+                   required/>
+        </div>
+        <div class="form-group">
+            <label th:for="${#ids.next('age')}">
+                Age(optional)
+            </label>
+            <input type="number"
+                   th:field="*{age}"
+                   placeholder="Age"
+                   class="form-control"
+                   min="10"
+                   max="99"/>
+        </div>
+        <div class="form-group">
+            <label id="select-label"
+                   th:for="${#ids.next('currentRole')}">Which option best describes your current role?</label>
+            <select th:field="*{currentRole}" required>
+                <option th:each="role : ${currentRoles}"
+                        th:value="${role}"
+                        th:text="${role}">Select your current role
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="r1">
+                Would you recommend our site to your friend?
+            </label>
+            <table id="r1">
+                <tr th:each="rT : ${recommendTypes}">
+                    <td><input type="radio" th:field="*{recommend}" th:value="${rT}"/></td>
+                    <td><label th:for="${#ids.prev('recommend')}" th:text="${rT}"></label></td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <label for="c1">
+                What language do you like to learn?
+            </label>
+            <table id="c1">
+                <tr th:each="languageType : ${languageTypes}">
+                    <td><input type="checkbox" th:field="*{language}" th:value="${languageType}"/></td>
+                    <td><label th:for="${#ids.prev('language')}"
+                               th:text="${languageType}"></label></td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <label th:for="${#ids.next('comments')}">
+                Any comments or suggestions?
+            </label>
+            <textarea th:field="*{comments}"
+                      class="form-control">
+		</textarea>
+        </div>
+        <div class="form-group">
+            <button id="submit"
+                    type="submit"
+                    class="submit-button">
+                Submit
+            </button>
+        </div>
+    </form>
+</main>
+</body>
+</html>
