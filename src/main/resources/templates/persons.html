@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/form.css">
+</head>
+<body>
+<p th:text="'Hello, ' + ${person.firstName} + ' '+${person.lastName}+ '! Your age is ' + ${person.age}" }/>
+<div th:unless="${#lists.isEmpty(personsList)}">
+    <h2>List of all persons</h2>
+    <table border="2" cellspacing="2" cellpadding="5" style="background-color:rgba(150,150,150,0.4)">
+        <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Current Role</th>
+            <th>Recommend</th>
+            <th>Language</th>
+            <th>Comments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${personsList}">
+            <td th:text="${p.firstName}"></td>
+            <td th:text="${p.lastName}"></td>
+            <td th:text="${p.email}"></td>
+            <td th:text="${p.age}"></td>
+            <td th:text="${p.currentRole}"></td>
+            <td th:text="${p.recommend}"></td>
+            <td th:text="${p.language}"></td>
+            <td th:text="${p.comments}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form action="#" th:action="@{/}" th:object="${person}" method="post">
+    <table>
+        <tr>
+            <td><input type="text" th:field="*{firstName}"/></td>
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{lastName}"/></td>
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{email}"/></td>
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{age}"/></td>
+        </tr>
+        <tr>
+            <td><select th:field="*{currentRole}">
+                <option th:each="role : ${currentRoles}"
+                        th:value="${role}"
+                        th:text="${role}">Select your current role
+                </option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li th:each="rT : ${recommendTypes}">
+                        <input type="radio" th:field="*{recommend}" th:value="${rT}"/>
+                        <label th:for="${#ids.prev('recommend')}" th:text="${rT}"></label>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea type="text" th:field="*{comments}"
+                          class="form-control">
+		        </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li th:each="languageType : ${languageTypes}">
+                        <input type="checkbox" th:field="*{language}" th:value="${languageType}"/>
+                        <label th:for="${#ids.prev('language')}"
+                               th:text="${languageType}"></label>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="submit"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
